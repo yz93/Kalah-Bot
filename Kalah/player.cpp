@@ -164,11 +164,13 @@ void SmartPlayer::minimax(const Board& b, Side s, int level, int& bestAction, in
 		return;
 	}
 	int currBestMove = 0;
+	int randomMoveWhenLosing;
 	if (s == SOUTH){  // south player is MAX
 		int currMax = INT_MIN;
 		
 		for (int i = 1; i <= b.holes(); ++i){
 			if (b.beans(s, i) > 0){
+				randomMoveWhenLosing = i;
 				Board copyB = b;
 				fakeMove(copyB, s, i);
 				minimax(copyB, opponent(s), level+1, bestAction, utility);
@@ -177,24 +179,31 @@ void SmartPlayer::minimax(const Board& b, Side s, int level, int& bestAction, in
 					//bestAction = i;
 					currBestMove = i;
 				}
-				
 			}
 		}
-		bestAction = currBestMove;
+		if (currBestMove != 0)
+			bestAction = currBestMove;
+		if (currMax == INT_MIN)
+			bestAction = randomMoveWhenLosing;
 	}
 	else{  // side is north, MIN
 		int currMin = INT_MAX;
 		for (int i = 1; i <= b.holes(); ++i){
 			if (b.beans(s, i) > 0){
+				randomMoveWhenLosing = i;
 				Board copyB = b;
 				fakeMove(copyB, s, i);
 				minimax(copyB, opponent(s), level + 1, bestAction, utility);
 				if (utility < currMin){
 					currMin = utility;
-					bestAction = i;
+					//bestAction = i;
+					currBestMove = i;
 				}
 			}
 		}
-		bestAction = currBestMove;
+		if (currBestMove != 0)
+			bestAction = currBestMove;
+		if (currMin == INT_MAX)
+			bestAction = randomMoveWhenLosing;
 	}
 }

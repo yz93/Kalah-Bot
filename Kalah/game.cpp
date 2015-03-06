@@ -67,7 +67,7 @@ bool Game::move()
 	while (notFinished)
 	{
 		int move = playerMove(m_turn);
-		cout << "MOVE IS: " << move << endl;
+		//cout << "MOVE IS: " << move << endl;
 		Side endSide;
 		int endHole;
 		

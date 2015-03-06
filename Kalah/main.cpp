@@ -132,11 +132,20 @@ int main()
 	cout << "Press ENTER to start the Game..." << endl;
 	cin.ignore(10, '\n');
 	SmartPlayer bp1("Zhao");
-	BadPlayer bp2("Jiaqi");
+	SmartPlayer bp2("Jiaqi");
 	Board b(3, 0);
 	Board b2(6,0);
+	Board b3(6, 0);
+	b3.setBeans(NORTH, 2, 1);
+	b3.setBeans(NORTH, 5, 2);
+	b3.setBeans(NORTH, 0, 22);
+	b3.setBeans(SOUTH, 3, 2);
+	b3.setBeans(SOUTH, 5, 1);
+	b3.setBeans(SOUTH, 0, 20);
+
 	b2.setBeans(NORTH, 1, 2);
 	b2.setBeans(NORTH, 2, 4);
+
 	for (int i = 3; i <= 6;++i)
 		b2.setBeans(SOUTH, i, 1);
 	b2.setBeans(NORTH, 0, 22);
@@ -147,9 +156,10 @@ int main()
 	b.setBeans(NORTH, 3, 2);
 	Game g(b, &bp1, &bp2);
 	Game g2(b2, &bp1, &bp2);
-	
+	Game g3(b3, &bp1, &bp2);
 
 	g.play();
 	//g2.play();
+	//g3.play();
 	
 }

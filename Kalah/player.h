@@ -4,7 +4,7 @@
 #include "board.h"
 #include "side.h"
 using namespace std;
-#define MAX_LEVEL 5
+#define MAX_LEVEL 11
 
 class Player{
 public:
